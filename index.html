@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>historyAPI</title>
+</head>
+<body>
+	<header>
+		<h2>historyAPI demo</h2>
+	</header>
+	<section>
+		<audio src="source/01.mp3" controls loop></audio>
+	</section>
+	<section id="content">
+		<h4>Press The Play Button Above</h4>
+		<p>Press the play button above and then try clicking <a href="data.html">this link</a>.The music will continue to play but the history and page will,update.The music will even continue playing if you press the back and forward buttons.Pretty cool,huh</p>
+	</section>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script>
+	
+	function anchorSplit(link){
+		$.get(link,function(data){
+			$("#content").html(data);
+		})
+	}
+	$(function(){
+		$("#content").on("click","a",function(e){
+			window.history.pushState(null,null,$(this).attr('href'));
+			anchorSplit($(this).attr('href'));
+			e.preventDefault();
+		});
+	})
+
+	</script>
+</body>
+</html>
